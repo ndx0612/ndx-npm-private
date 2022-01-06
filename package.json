@@ -1,0 +1,19 @@
+{
+  "name": "ndx-npm-private",
+  "version": "1.0.0",
+  "description": "个人工具集合",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ndx2527/ndx-npm-private.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ndx2527/ndx-npm-private/issues"
+  },
+  "homepage": "https://github.com/ndx2527/ndx-npm-private#readme"
+}
