@@ -37,7 +37,7 @@ console.log(obj2);
 
 ## 二、查询
 
-1、deepClone
+### 1、deepClone-深度克隆
 
 说明：深度克隆一个对象或者数组。
 
@@ -56,7 +56,7 @@ const obj2 = formatDate.deepClone(obj); // 返回深度克隆后的对象
 
 
 
-2、fastSort
+### 2、fastSort-快速排序
 
 说明：将数组从小到大排序（默认）
 
@@ -74,7 +74,7 @@ fastSort(nums,true) // 降序
 
 
 
-3、sortObj
+### 3、sortObj-对象排序
 
 说明：对数组（里面包含多个对象）进行排序。
 
@@ -96,7 +96,7 @@ sortObj(list, 'age'); // 通过age进行排序(升序)
 
 
 
-4、timediffer
+### 4、timediffer-计算时差
 
 说明：时间差值显为易读形式。
 
@@ -120,5 +120,28 @@ sortObj(list, 'age'); // 通过age进行排序(升序)
 var t1 = new Date("2020-10-11 15:21:57");
 var t2 = new Date(); // 获取当前时间
 console.log(timediffer(t1, t2));
+```
+
+### 5、judge正则验证
+
+说明：验证是否为手机号、URL、邮箱
+
+用法：
+
+```javascript
+console.log(judge.isMobile('15055906047')); 
+console.log(judge.isUrl('https://www.baidu.com/'));
+console.log(judge.isEmail('1378362527@qq.com'));
+```
+
+### 6、arrDisorder数组乱序
+
+说明：传入一个数组，深度克隆一个新的乱序数组并返回
+
+用法：
+
+```javascript
+const arr = [1, 2, 3, 4, 5, 6, 7, 8]
+console.log(arrDisorder(arr)); // 输出乱序数组
 ```
 

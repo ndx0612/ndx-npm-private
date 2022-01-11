@@ -83,11 +83,44 @@ var timediffer = function (last, now) {
   return tip;
 }
 
+// 正则验证
+const judge = {
+  isMobile(parameter) {
+    let patt = /^1(3\d|4[5-9]|5[0-35-9]|6[567]|7[0-8]|8\d|9[0-35-9])\d{8}$/;
+    return patt.test(parameter);
+  },
+  isUrl(parameter) {
+    let patt = /((http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?)/
+    return patt.test(parameter);
+  },
+  isEmail(parameter) {
+    let patt = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
+    return patt.test(parameter);
+  }
+}
+
+// 乱序方法
+function arrDisorder(arr) {
+  var newArr = deepClone(arr)
+  for (let i = 0; i < newArr.length; i++) {
+    var index = Math.floor(Math.random() * newArr.length);
+    var swap = newArr[i];
+    newArr[i] = newArr[index];
+    newArr[index] = swap;
+  }
+  return newArr;
+}
+
+const arr = [1, 2, 3, 4, 5, 6, 7, 8]
+console.log(arrDisorder(arr));
+
 
 // 导出模块
 module.exports = {
   deepClone,
   fastSort,
   sortObj,
-  timediffer
+  timediffer,
+  judge,
+  arrDisorder,
 }
