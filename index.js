@@ -111,9 +111,10 @@ function arrDisorder(arr) {
   return newArr;
 }
 
-const arr = [1, 2, 3, 4, 5, 6, 7, 8]
-console.log(arrDisorder(arr));
-
+function getRandom(num) {
+  const currentNumber = Math.random().toString().slice(2, num + 2)
+  return currentNumber;
+}
 
 // 导出模块
 module.exports = {
@@ -123,4 +124,5 @@ module.exports = {
   timediffer,
   judge,
   arrDisorder,
+  getRandom,
 }

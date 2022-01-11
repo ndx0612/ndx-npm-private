@@ -2,9 +2,11 @@
 
 ## 一、说明和用法
 
-1、改包连接githuub、更新前请先上传到GitHubhttps://github.com/ndx2527/ndx-npm-private.git
+### 1、改包连接githuub
 
-2、上传
+更新前请先上传到GitHubhttps://github.com/ndx2527/ndx-npm-private.git
+
+### 2、上传
 
 ```
 # 版本更新
@@ -14,7 +16,7 @@ npm version patch
 npm publish
 ```
 
-3、用法
+### 3、用法
 
 ```js
 import formatDate from 'ndx-npm-private'
@@ -33,7 +35,13 @@ console.log(obj1);
 console.log(obj2);
 ```
 
+### 4、扩展：修改源
 
+查看源：npm config get registry
+
+配置淘宝镜像源：npm config set registry https://registry.npm.taobao.org
+
+配置官方源： npm config set registry https://registry.npmjs.org/
 
 ## 二、查询
 
@@ -143,5 +151,15 @@ console.log(judge.isEmail('1378362527@qq.com'));
 ```javascript
 const arr = [1, 2, 3, 4, 5, 6, 7, 8]
 console.log(arrDisorder(arr)); // 输出乱序数组
+```
+
+### 7、getRandom获取随机验证码
+
+说明：传入一个参数（数字），获取指定长度的验证码（字符串类型）。
+
+用法：
+
+```javascript
+console.log(getRandom(6)); // 输出6为随机数
 ```
 
