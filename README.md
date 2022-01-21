@@ -76,8 +76,8 @@ const obj2 = formatDate.deepClone(obj); // 返回深度克隆后的对象
 
 ```javascript
 nums = [1, 31, 5, 20, 8, 16, 51, 64]
-fastSort(nums) // 升序
-fastSort(nums,true) // 降序
+formatDate.fastSort(nums) // 升序
+formatDate.fastSort(nums,true) // 降序
 ```
 
 
@@ -137,9 +137,9 @@ console.log(timediffer(t1, t2));
 用法：
 
 ```javascript
-console.log(judge.isMobile('15055906047')); 
-console.log(judge.isUrl('https://www.baidu.com/'));
-console.log(judge.isEmail('1378362527@qq.com'));
+console.log(formatDate.judge.isMobile('15055906047'));
+console.log(formatDate.judge.isUrl('https://www.baidu.com/'));
+console.log(formatDate.judge.isEmail('1378362527@qq.com'));
 ```
 
 ### 6、arrDisorder数组乱序

@@ -31,7 +31,7 @@ function fastSort(array, bool) {
   return nums;
 }
 
-// 数组对象排序
+// 数组对象排序 [{},{},{}]
 function sortObj(object, option) {
   function compare(option) {
     return function (obj1, obj2) {
@@ -116,6 +116,20 @@ function getRandom(num) {
   return currentNumber;
 }
 
+// 数组去重
+let unique = function (arr) {
+  let hashTable = {};
+  let data = [];
+  for (let i = 0, l = arr.length; i < l; i++) {
+    if (!hashTable[arr[i]]) {
+      hashTable[arr[i]] = true;
+      data.push(arr[i]);
+    }
+  }
+  return data
+}
+
+
 // 导出模块
 module.exports = {
   deepClone,
@@ -125,4 +139,5 @@ module.exports = {
   judge,
   arrDisorder,
   getRandom,
+  unique,
 }
