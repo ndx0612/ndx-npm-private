@@ -1,4 +1,4 @@
-// 深度克隆
+// 深度拷贝
 function deepClone(source) {
   // 如果类型不是对象
   if (typeof source != "object") {
@@ -15,28 +15,21 @@ function deepClone(source) {
   return newObj;
 }
 
-// 数组排序,true为降序,不传为升序
-function fastSort(array, bool) {
-  let nums = array;
-  if (!bool) {
-    function sortNumber(a, b) {
-      return a - b;
-    }
-  } else {
-    function sortNumber(a, b) {
-      return b - a;
-    }
+// 数组排序(数字)
+function fastSort(array) {
+  function sortNumber(a, b) {
+    return a - b;
   }
-  nums = nums.sort(sortNumber);
-  return nums;
+  array = array.sort(sortNumber);
+  return array;
 }
 
-// 数组对象排序 [{},{},{}]
-function sortObj(object, option) {
-  function compare(option) {
+// 数组排序(对象)
+function sortObj(object, key) {
+  function compare(key) {
     return function (obj1, obj2) {
-      var val1 = obj1[option];
-      var val2 = obj2[option];
+      var val1 = obj1[key];
+      var val2 = obj2[key];
       if (!isNaN(Number(val1)) && !isNaN(Number(val2))) {
         val1 = Number(val1);
         val2 = Number(val2);
@@ -50,10 +43,10 @@ function sortObj(object, option) {
       }
     }
   }
-  return object.sort(compare(option));
+  return object.sort(compare(key));
 }
 
-// 时差计算
+// 时差计算(传入时间戳)
 var timediffer = function (last, now) {
   const options = {
     year: '年前',
@@ -99,7 +92,7 @@ const judge = {
   }
 }
 
-// 乱序方法
+// 数组乱序
 function arrDisorder(arr) {
   var newArr = deepClone(arr)
   for (let i = 0; i < newArr.length; i++) {
@@ -111,22 +104,10 @@ function arrDisorder(arr) {
   return newArr;
 }
 
+// 生成随机数(传入num位随机数)
 function getRandom(num) {
   const currentNumber = Math.random().toString().slice(2, num + 2)
   return currentNumber;
-}
-
-// 数组去重
-let unique = function (arr) {
-  let hashTable = {};
-  let data = [];
-  for (let i = 0, l = arr.length; i < l; i++) {
-    if (!hashTable[arr[i]]) {
-      hashTable[arr[i]] = true;
-      data.push(arr[i]);
-    }
-  }
-  return data
 }
 
 /**
@@ -193,7 +174,6 @@ module.exports = {
   judge,
   arrDisorder,
   getRandom,
-  unique,
   formatDate,
   getDeviceType,
 }
