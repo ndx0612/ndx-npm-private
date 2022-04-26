@@ -2,9 +2,17 @@
 
 ## 一、说明和用法
 
-### 1、改包连接githuub
+PS：接下来每一个版本的md文档都会更新！！！！
 
-更新前请先上传到GitHubhttps://github.com/ndx2527/ndx-npm-private.git
+
+
+[TOC]
+
+
+
+### 1、本包连接GitHub
+
+更新前请先上传到GitHub：https://github.com/ndx2527/ndx-npm-private.git
 
 ### 2、上传
 
@@ -19,7 +27,7 @@ npm publish
 ### 3、用法
 
 ```js
-import formatDate from 'ndx-npm-private'
+import dealDate from 'ndx-npm-private'
 
 const obj1 = {
   name: 'tom',
@@ -28,7 +36,7 @@ const obj1 = {
 }
 
 // 深度拷贝 obj1 ，使用的是自己封装的方法
-const obj2 = formatDate.deepClone(obj1);
+const obj2 = dealDate.deepClone(obj1);
 
 obj2.name = 'ndx';
 console.log(obj1);
@@ -59,7 +67,7 @@ const obj1 = {
   age: 20,
   arr: [1, 2, 3, 4]
 }
-const obj2 = formatDate.deepClone(obj); // 返回深度克隆后的对象
+const obj2 = dealDate.deepClone(obj); // 返回深度克隆后的对象
 ```
 
 
@@ -76,8 +84,7 @@ const obj2 = formatDate.deepClone(obj); // 返回深度克隆后的对象
 
 ```javascript
 nums = [1, 31, 5, 20, 8, 16, 51, 64]
-formatDate.fastSort(nums) // 升序
-formatDate.fastSort(nums,true) // 降序
+dealDate.fastSort(nums) // 升序
 ```
 
 
@@ -120,7 +127,7 @@ sortObj(list, 'age'); // 通过age进行排序(升序)
 
 ​	6.大于12个月，？年前
 
-参数：第一个参数为过去事件，第二个参数为之后时间（不传默认为当前时间）
+参数：第一个参数为过去时间，第二个参数为之后时间（不传默认为当前时间），参数是时间戳！
 
 示例：
 
@@ -137,9 +144,9 @@ console.log(timediffer(t1, t2));
 用法：
 
 ```javascript
-console.log(formatDate.judge.isMobile('15055906047'));
-console.log(formatDate.judge.isUrl('https://www.baidu.com/'));
-console.log(formatDate.judge.isEmail('1378362527@qq.com'));
+console.log(dealDate.judge.isMobile('15055906047'));
+console.log(dealDate.judge.isUrl('https://www.baidu.com/'));
+console.log(dealDate.judge.isEmail('1378362527@qq.com'));
 ```
 
 ### 6、arrDisorder数组乱序
@@ -161,5 +168,23 @@ console.log(arrDisorder(arr)); // 输出乱序数组
 
 ```javascript
 console.log(getRandom(6)); // 输出6为随机数
+```
+
+### 8、formatDate处理日期格式
+
+说明：传入时间戳，可以转换成你想要的格式
+
+用法：
+
+```javascript
+/**
+ * @description: 时间戳转日期对象 默认当前日期
+ * @param {number} date 时间戳
+ * @param {string} pattern 时间格式
+ * @return {*}
+ */
+var time = new Date()
+console.log(formatDate(time , 'yyyy-MM-dd hh:mm:ss')); // 2022-04-26 17:45:30
+console.log(formatDate(time , 'yyyy-M-dd hh:mm')); // 2022-4-26 17:45
 ```
 
