@@ -1,6 +1,6 @@
 {
   "name": "ndx-npm-private",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "个人工具集合",
   "main": "index.js",
   "scripts": {
