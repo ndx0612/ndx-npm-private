@@ -235,6 +235,28 @@ function throttle(func, wait = 500, immediate = true) {
 };
 
 
+/**
+* @description: 文件流转文件下载
+* @param {string} fileName 文件名(带上后缀)
+* @param {string} data 二进制流数据
+* @return {*}
+*/
+const dataToFile = (fileName, data) => {
+  let type = 'application/octet-stream;';
+  // 兼容 IE
+  if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+    window.navigator.msSaveOrOpenBlob(new Blob([data]), fileName);
+  } else {
+    // 非IE 浏览器
+    const url = window.URL.createObjectURL(new Blob([data], { type }));
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', `${fileName}`);
+    document.body.appendChild(link);
+    link.click();
+    window.URL.revokeObjectURL(url); // 释放内存
+  }
+};
 
 // 导出模块
 module.exports = {
@@ -249,4 +271,5 @@ module.exports = {
   getDeviceType,
   debounce,
   throttle,
+  dataToFile,
 }
