@@ -24,21 +24,29 @@ npm version patch
 npm publish
 ```
 
-### 3、用法
+### 3、使用方法
+
+1）安装模块
+
+```
+npm i ndx-npm-private
+```
+
+2）按需导入模块
 
 ```js
-import dealDate from 'ndx-npm-private'
+import { deepClone } from "ndx-npm-private";
 
 const obj1 = {
-  name: 'tom',
+  name: "tom",
   age: 20,
-  arr: [1, 2, 3, 4]
-}
+  arr: [1, 2, 3, 4],
+};
 
 // 深度拷贝 obj1 ，使用的是自己封装的方法
-const obj2 = dealDate.deepClone(obj1);
+const obj2 = deepClone(obj1);
 
-obj2.name = 'ndx';
+obj2.name = "ndx";
 console.log(obj1);
 console.log(obj2);
 ```
@@ -118,7 +126,11 @@ console.log(formatDate(time , 'yyyy-MM-dd hh:mm:ss')); // 2022-04-26 17:45:30
 console.log(formatDate(time , 'yyyy-M-dd hh:mm')); // 2022-4-26 17:45
 ```
 
+
+
 ### 4、获取设备类型
+
+说明：返回bool值，true移动端；反之PC端
 
 ```javascript
 /**
@@ -129,8 +141,68 @@ console.log(formatDate(time , 'yyyy-M-dd hh:mm')); // 2022-4-26 17:45
 console.log(getDeviceType()); // true移动端；反之PC端
 ```
 
+
+
+### 5、防抖
+
+说明：一定时间内重复触发，仅执行最后一次操作，例如（搜索框）
+
+```javascript
+/**
+ * 防抖原理：一定时间内，只有最后一次操作，再过wait毫秒后才执行函数
+ * @description: 防抖
+ * @param {Function} func 要执行的回调函数 
+ * @param {Number} wait 延时的时间
+ * @return null
+ */
+
+// 使用示例
+<template>
+  <div>
+    <el-button @click="printTest">按钮</el-button>
+  </div>
+</template>
+
+<script setup>
+import { debounce } from "ndx-npm-private";
+
+const printTest = () => {
+  console.log('1');
+  debounce(() => {
+    console.log("一定时间内，只有最后一次操作，再过wait毫秒后才执行函数");
+  }, 1000);
+};
+</script>
+```
+
+
+
+### 6、节流
+
+说明：一定时间内多次触发仅执行一次。例如：抢票按钮
+
+```javascript
+/**
+ * 节流原理：在一定时间内，只能触发一次
+ * @description: 节流
+ * @param {Function} func 要执行的回调函数 
+ * @param {Number} wait 延时的时间
+ * @return null
+ */
+ // 使用示例见防抖
+```
+
+
+
+
+
 ## 三、其它
 
 1）推荐一：JavaScript常用方法库，可直接查看笔记：https://note.youdao.com/s/M3YELiSI
 
 2）推荐二：vueuse官方库，自己总结的笔记：https://note.youdao.com/s/2lqjACyC
+
+3）推荐三：自己写的自定义指令集合。GitHub地址：https://github.com/ndx2527/custom-instruction.git
+
+4）推荐四：自己封装的组件集合。GitHub地址：https://github.com/ndx2527/components.git
+
