@@ -1,4 +1,6 @@
-// 深度拷贝
+/**
+ * 深度拷贝
+ */
 function deepClone(source) {
   // 如果类型不是对象
   if (typeof source != "object") {
@@ -15,39 +17,10 @@ function deepClone(source) {
   return newObj;
 }
 
-// 数组排序(数字)
-function fastSort(array) {
-  function sortNumber(a, b) {
-    return a - b;
-  }
-  array = array.sort(sortNumber);
-  return array;
-}
-
-// 数组排序(对象)
-function sortObj(object, key) {
-  function compare(key) {
-    return function (obj1, obj2) {
-      var val1 = obj1[key];
-      var val2 = obj2[key];
-      if (!isNaN(Number(val1)) && !isNaN(Number(val2))) {
-        val1 = Number(val1);
-        val2 = Number(val2);
-      }
-      if (val1 < val2) {
-        return -1;
-      } else if (val1 > val2) {
-        return 1;
-      } else {
-        return 0;
-      }
-    }
-  }
-  return object.sort(compare(key));
-}
-
-// 时差计算(传入时间戳)
-var timediffer = function (last, now) {
+/**
+ * 计算两个时间的差值
+ */
+var timeDiffer = function (last, now) {
   const options = {
     year: '年前',
     month: '个月前',
@@ -76,51 +49,9 @@ var timediffer = function (last, now) {
   return tip;
 }
 
-// 正则验证
-const judge = {
-  isMobile(parameter) {
-    let patt = /^1(3\d|4[5-9]|5[0-35-9]|6[567]|7[0-8]|8\d|9[0-35-9])\d{8}$/;
-    return patt.test(parameter);
-  },
-  isUrl(parameter) {
-    let patt = /((http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?)/
-    return patt.test(parameter);
-  },
-  isEmail(parameter) {
-    let patt = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
-    return patt.test(parameter);
-  }
-}
-
-// 数组乱序
-function arrDisorder(arr) {
-  var newArr = deepClone(arr)
-  for (let i = 0; i < newArr.length; i++) {
-    var index = Math.floor(Math.random() * newArr.length);
-    var swap = newArr[i];
-    newArr[i] = newArr[index];
-    newArr[index] = swap;
-  }
-  return newArr;
-}
-
-// 生成随机数(传入num位随机数)
-function getRandom(num) {
-  const currentNumber = Math.random().toString().slice(2, num + 2)
-  return currentNumber;
-}
-
 /**
- * @description: 时间戳转日期对象 默认当前日期
- * @param {number} date 时间戳
- * @param {string} pattern 时间格式
- * @return {*}
+ * 日期补0
  */
-// formatDate(baseData.updateTime , 'yyyy-MM-dd hh:mm:ss')
-
-const DEFAULT_PATTERN = "yyyy-MM-dd"
-const SIGN_REGEXP = /([yMdhsm])(\1*)/g
-// 个位日期补0
 function padding(s, len) {
   len = len - (s + "").length
   for (var i = 0; i < len; i++) {
@@ -128,13 +59,19 @@ function padding(s, len) {
   }
   return s
 }
-const formatDate = function (date = new Date(), pattern) {
+
+/**
+ * @description: 时间戳转日期对象 默认当前日期
+ * @param {number} date 时间戳
+ * @param {string} pattern 时间格式
+ */
+const formatDate = (date = new Date(), pattern) => {
   if (typeof date == "string") date = Number(date)
   if (typeof date == "string" || typeof date == "number") {
     date = new Date((date + "").length == 10 ? date * 1000 : date)
   }
-  pattern = pattern || DEFAULT_PATTERN
-  return pattern.replace(SIGN_REGEXP, function ($0) {
+  pattern = pattern || "yyyy-MM-dd"
+  return pattern.replace(/([yMdhsm])(\1*)/g, function ($0) {
     switch ($0.charAt(0)) {
       case "y":
         return padding(date.getFullYear(), $0.length)
@@ -159,7 +96,7 @@ const formatDate = function (date = new Date(), pattern) {
  * @return { boolean }  facility:true移动端；反之PC端
  * @return {*}
  */
-const getDeviceType = function () {
+const getDeviceType = () => {
   const userAgent = navigator.userAgent
   const Agents = [
     "Android",
@@ -261,12 +198,7 @@ const dataToFile = (fileName, data) => {
 // 导出模块
 module.exports = {
   deepClone,
-  fastSort,
-  sortObj,
-  timediffer,
-  judge,
-  arrDisorder,
-  getRandom,
+  timeDiffer,
   formatDate,
   getDeviceType,
   debounce,

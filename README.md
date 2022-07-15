@@ -72,46 +72,7 @@ const obj2 = dealDate.deepClone(obj); // 返回深度克隆后的对象
 
 
 
-### 2、fastSort-快速排序
-
-说明：将数组从小到大排序（默认）
-
-参数：传入参数为一个数组，返回排序后的数组。
-
-​		第二个参数为bool值，默认为flase（升序）。true为降序
-
-示例：
-
-```javascript
-nums = [1, 31, 5, 20, 8, 16, 51, 64]
-dealDate.fastSort(nums) // 升序
-```
-
-
-
-### 3、sortObj-对象排序
-
-说明：对数组（里面包含多个对象）进行排序。
-
-参数：第一个为需要排序的数组对象
-
-​		第二个参数为字符串，选择需要排序的字段
-
-示例：
-
-```javascript
-list = [
-  { name: 'lwx', sex: 'bbbb', age: 22 },
-  { name: 'xiaohu', sex: 'fd', age: 30 },
-  { name: 'lwx', sex: 'ghf', age: 5 },
-  { name: 'tian', sex: 'ghf', age: 10 },
-];
-sortObj(list, 'age'); // 通过age进行排序(升序)
-```
-
-
-
-### 4、timediffer-计算时差
+### 2、timeDiffer-计算时差
 
 说明：时间差值显为易读形式。
 
@@ -137,40 +98,9 @@ var t2 = new Date(); // 获取当前时间
 console.log(timediffer(t1, t2));
 ```
 
-### 5、judge正则验证
 
-说明：验证是否为手机号、URL、邮箱
 
-用法：
-
-```javascript
-console.log(dealDate.judge.isMobile('15055906047'));
-console.log(dealDate.judge.isUrl('https://www.baidu.com/'));
-console.log(dealDate.judge.isEmail('1378362527@qq.com'));
-```
-
-### 6、arrDisorder数组乱序
-
-说明：传入一个数组，深度克隆一个新的乱序数组并返回
-
-用法：
-
-```javascript
-const arr = [1, 2, 3, 4, 5, 6, 7, 8]
-console.log(arrDisorder(arr)); // 输出乱序数组
-```
-
-### 7、getRandom获取随机验证码
-
-说明：传入一个参数（数字），获取指定长度的验证码（字符串类型）。
-
-用法：
-
-```javascript
-console.log(getRandom(6)); // 输出6为随机数
-```
-
-### 8、formatDate处理日期格式
+### 3、formatDate处理日期格式
 
 说明：传入时间戳，可以转换成你想要的格式
 
@@ -188,3 +118,19 @@ console.log(formatDate(time , 'yyyy-MM-dd hh:mm:ss')); // 2022-04-26 17:45:30
 console.log(formatDate(time , 'yyyy-M-dd hh:mm')); // 2022-4-26 17:45
 ```
 
+### 4、获取设备类型
+
+```javascript
+/**
+ * @description: 获取设备类型
+ * @return { boolean }  facility:true移动端；反之PC端
+ * @return {*}
+ */
+console.log(getDeviceType()); // true移动端；反之PC端
+```
+
+## 三、其它
+
+1）推荐一：JavaScript常用方法库，可直接查看笔记：https://note.youdao.com/s/M3YELiSI
+
+2）推荐二：vueuse官方库，自己总结的笔记：https://note.youdao.com/s/2lqjACyC
