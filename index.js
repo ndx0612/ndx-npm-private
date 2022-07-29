@@ -18,35 +18,24 @@ function deepClone(source) {
 }
 
 /**
- * 计算两个时间的差值
+ * @desc   格式化${startTime}距现在的已过时间
+ * @param  {Date} startTime 
+ * @return {String}
  */
-var timeDiffer = function (last, now) {
-  const options = {
-    year: '年前',
-    month: '个月前',
-    day: '天前',
-    hour: '小时前',
-    minute: '分钟前',
-    second: '秒前',
-    just: '刚刚',
-  }
-  if (!now) {
-    var now = new Date();
-  }
-  const timer = (now - last) / 1000; // 获取秒数
-  let tip = '';
-  if (timer <= 0 || Math.floor(timer / 60) <= 0) { // 小于60s,刚刚
-    tip = options.just;
-  } else if (timer < 60 * 60) {
-    tip = Math.floor(timer / 60) + `${options.minute}`;
-  } else if (timer < 60 * 60 * 24) {
-    tip = Math.floor(timer / 3600) + `${options.hour}`;
-  } else if (timer < 60 * 60 * 24 * 30) {
-    tip = Math.ceil(timer / 86400) + `${options.day}`;
-  } else {
-    tip = Math.floor(timer / (86400 * 24)) + `${options.month}`;
-  }
-  return tip;
+var timeDiffer = function (startTime) {
+  var currentTime = Date.parse(new Date()),
+    time = currentTime - startTime,
+    day = parseInt(time / (1000 * 60 * 60 * 24)),
+    hour = parseInt(time / (1000 * 60 * 60)),
+    min = parseInt(time / (1000 * 60)),
+    month = parseInt(day / 30),
+    year = parseInt(month / 12);
+  if (year) return year + "年前"
+  if (month) return month + "个月前"
+  if (day) return day + "天前"
+  if (hour) return hour + "小时前"
+  if (min) return min + "分钟前"
+  else return '刚刚'
 }
 
 /**
@@ -195,6 +184,49 @@ const dataToFile = (fileName, data) => {
   }
 };
 
+/**
+ * @description: 当localStorage里面存的是对象的时候，获取值
+ * @param {string} localStorageKey
+ * @return {Object}
+ */
+const getLocalStorageData = (localStorageKey) => {
+  var data = localStorage.getItem(localStorageKey);
+  if (data != null) {
+    // 本地存储里面的数据是字符串格式的，但我们需要的是对象格式
+    return JSON.parse(data);
+  } else {
+    return {};
+  }
+};
+
+/**
+ * @description: 重置一个对象的所有key
+ * @param {Object} obj
+ * @returns {Object}
+ */
+const resetObject = (obj) => {
+  for (const item in obj) {
+    obj[item] = "";
+  }
+  return obj;
+};
+
+
+const judge = {
+  isMobile(parameter) {
+    let reg = /^1(3\d|4[5-9]|5[0-35-9]|6[567]|7[0-8]|8\d|9[0-35-9])\d{8}$/;
+    return reg.test(parameter);
+  },
+  isUrl(parameter) {
+    let reg = /((http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?)/
+    return reg.test(parameter);
+  },
+  isEmail(parameter) {
+    let reg = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
+    return reg.test(parameter);
+  }
+}
+
 // 导出模块
 module.exports = {
   deepClone,
@@ -204,4 +236,6 @@ module.exports = {
   debounce,
   throttle,
   dataToFile,
+  getLocalStorageData,
+  resetObject
 }
