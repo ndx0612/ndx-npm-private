@@ -59,7 +59,23 @@ console.log(obj2);
 
 配置官方源： npm config set registry https://registry.npmjs.org/
 
-## 二、查询
+
+
+## 二、总览
+
+- 深度拷贝：deepClone
+- 计算时差：timeDiffer
+- 时间戳转日期：formatDate
+- 获取设备类型：getDeviceType
+- 防抖：debounce
+- 节流：throttle
+- 金额转大写：digitUppercase
+- 重置一个对象的所有key的值：resetObject
+- URL解析：parseQueryString
+
+
+
+## 三、详情
 
 ### 1、deepClone-深度克隆
 
@@ -195,14 +211,4 @@ const printTest = () => {
 
 
 
-
-## 三、其它
-
-1）推荐一：JavaScript常用方法库，可直接查看笔记：https://note.youdao.com/s/M3YELiSI
-
-2）推荐二：vueuse官方库，自己总结的笔记：https://note.youdao.com/s/2lqjACyC
-
-3）推荐三：自己写的自定义指令集合。GitHub地址：https://github.com/ndx2527/custom-instruction.git
-
-4）推荐四：自己封装的组件集合。GitHub地址：https://github.com/ndx2527/components.git
 
