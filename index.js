@@ -1,5 +1,5 @@
 /**
- * 深度拷贝
+ * @description: 深度拷贝
  */
 function deepClone(source) {
   // 如果类型不是对象
@@ -18,8 +18,8 @@ function deepClone(source) {
 }
 
 /**
- * @desc   格式化${startTime}距现在的已过时间
- * @param  {Date} startTime 
+ * @description: 计算时差
+ * @param {String} startTime 
  * @return {String}
  */
 var timeDiffer = function (startTime) {
@@ -205,17 +205,47 @@ const getLocalStorageData = (localStorageKey) => {
  * @returns {Object}
  */
 const resetObject = (obj) => {
+  // 1、数字、字符串、boolean值重置为 ""
+  // 2、数组重置为[]
+  // 3、对象重置为{}
   for (const item in obj) {
     if (obj[item]) {
+      console.log(obj[item].constructor);
       if (obj[item].constructor === Array) {
-        obj[item] = []
+        obj[item] = [];
+      } else if (obj[item].constructor === Object) {
+        obj[item] = {};
       } else {
-        obj[item] = ""
+        obj[item] = "";
       }
     }
   }
   return obj
 };
+
+/**
+ * @description: url解析
+ * @param  {String} url  default: window.location.href
+ * @return {Object}
+ */
+ function parseQueryString(url) {
+  url = !url ? window.location.href : url;
+  if (url.indexOf("?") === -1) {
+    return {};
+  }
+  var search =
+    url[0] === "?" ? url.substr(1) : url.substring(url.lastIndexOf("?") + 1);
+  if (search === "") {
+    return {};
+  }
+  search = search.split("&");
+  var query = {};
+  for (var i = 0; i < search.length; i++) {
+    var pair = search[i].split("=");
+    query[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1] || "");
+  }
+  return query;
+}
 
 
 const judge = {
@@ -247,6 +277,42 @@ const formatMoney = (money, precision = 2, splitDesc = ",") => {
   return str.replace(reg, "$1" + splitDesc);
 };
 
+/**
+ * @description: 金额转大写
+ * @param  {Number} n 
+ * @return {String}
+ */
+function digitUppercase(n) {
+  var fraction = ['角', '分'];
+  var digit = [
+    '零', '壹', '贰', '叁', '肆',
+    '伍', '陆', '柒', '捌', '玖'
+  ];
+  var unit = [
+    ['元', '万', '亿'],
+    ['', '拾', '佰', '仟']
+  ];
+  var head = n < 0 ? '欠' : '';
+  n = Math.abs(n);
+  var s = '';
+  for (var i = 0; i < fraction.length; i++) {
+    s += (digit[Math.floor(n * 10 * Math.pow(10, i)) % 10] + fraction[i]).replace(/零./, '');
+  }
+  s = s || '整';
+  n = Math.floor(n);
+  for (var i = 0; i < unit[0].length && n > 0; i++) {
+    var p = '';
+    for (var j = 0; j < unit[1].length && n > 0; j++) {
+      p = digit[n % 10] + unit[1][j] + p;
+      n = Math.floor(n / 10);
+    }
+    s = p.replace(/(零.)*零$/, '').replace(/^$/, '零') + unit[0][i] + s;
+  }
+  return head + s.replace(/(零.)*零元/, '元')
+    .replace(/(零.)+/g, '零')
+    .replace(/^整$/, '零元整');
+};
+
 // 导出模块
 module.exports = {
   deepClone,
@@ -257,5 +323,7 @@ module.exports = {
   throttle,
   dataToFile,
   getLocalStorageData,
-  resetObject
+  resetObject,
+  parseQueryString,
+  digitUppercase
 }
