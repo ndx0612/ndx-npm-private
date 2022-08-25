@@ -317,13 +317,13 @@ function digitUppercase(n) {
  * @description: 保留小数位
  * @param {Number, String}
  * @param {Number} 保留几位小数
- * @param {Boolean} 是否返回字符串
+ * @param {Boolean} 是否返回数字类型
  */
- function financial(num, decimal = 2, isString = true) {
-  if (isString) {
-    return Number.parseFloat(num).toFixed(decimal);
-  } else {
+ function financial(num, decimal = 2, isNumber = false) {
+  if (isNumber) {
     return Number(Number.parseFloat(num).toFixed(decimal));
+  } else {
+    return Number.parseFloat(num).toFixed(decimal);
   }
 }
 
