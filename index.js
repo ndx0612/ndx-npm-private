@@ -228,7 +228,7 @@ const resetObject = (obj) => {
  * @param  {String} url  default: window.location.href
  * @return {Object}
  */
- function parseQueryString(url) {
+function parseQueryString(url) {
   url = !url ? window.location.href : url;
   if (url.indexOf("?") === -1) {
     return {};
@@ -319,12 +319,38 @@ function digitUppercase(n) {
  * @param {Number} 保留几位小数
  * @param {Boolean} 是否返回数字类型
  */
- function financial(num, decimal = 2, isNumber = false) {
+function financial(num, decimal = 2, isNumber = false) {
   if (isNumber) {
     return Number(Number.parseFloat(num).toFixed(decimal));
   } else {
     return Number.parseFloat(num).toFixed(decimal);
   }
+}
+
+/**
+ * @description: 解析省市区
+ * @param {string} str 收货地址
+ * @returns { province: '安徽省', city: '淮南市', county: '梁平区', village: '朝阳街道' }
+ */
+const formatAddress = (str) => {
+  const reg_address = "(?<province>[^省]+自治区|.*?省|.*?行政区|.*?市)(?<city>[^市]+自治州|.*?地区|.*?行政单位|.+盟|市辖区|.*?市|.*?县)(?<county>[^县]+县|.+?(区{1})|.+市|.+旗|.+海域|.+岛)?(?<village>.*)";
+  if (!str) return
+  // 中国4个直辖市
+  const municipality = ['重庆', '北京', '上海', '天津']
+  const subStr = str.substring(0, 2)
+  const isExist = municipality.includes(subStr)
+  if (isExist) {
+    str = str.substring(2, str.length - 1)
+    str = `${subStr}省${str}`
+  }
+  let addr = str.match(reg_address)
+  if (!addr) return
+  const groups = Object.assign({}, addr.groups)
+  // 如果是直辖市，截取地址后，把省字替换成市
+  if (isExist) {
+    groups.province = groups.province.replace('省', '')
+  }
+  return groups
 }
 
 // 导出模块
@@ -340,5 +366,6 @@ module.exports = {
   resetObject,
   parseQueryString,
   digitUppercase,
-  financial
+  financial,
+  formatAddress
 }
